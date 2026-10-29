@@ -1,0 +1,35 @@
+name: Offline tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    env:
+      MPLBACKEND: Agg
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install runtime, reports, and validation dependencies
+        run: python -m pip install -e '.[reports,validation]'
+      - name: Run offline tests with network calls blocked
+        run: python scripts/validate_release.py --out validation/ci
+      - name: Check public source archive
+        run: python scripts/build_open_source_release.py
