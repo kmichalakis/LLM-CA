@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+type: software
+message: "Please cite this software when using LLM-CA, and record the version or commit used."
+title: "LLM-CA Simulation and Benchmark Platform"
+authors:
+  - name: "LLM-CA contributors"
+version: "0.1.0"
+license: MIT
+repository-code: "https://github.com/kmichalakis/LLM-CA"
+abstract: >-
+  A Python framework for context-reasoning simulations across pervasive
+  environments. It provides synthetic scenarios, interchangeable reasoners,
+  evidence and action evaluation, annotation workflows, a GUI, and reports.
+  Synthetic offline results do not establish real-world effectiveness or
+  controlled large-language-model performance.
+keywords:
+  - context awareness
+  - pervasive computing
+  - simulation
+  - reproducibility
+  - large language models

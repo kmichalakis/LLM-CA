@@ -1,0 +1,15 @@
+{
+  "run_id": "paper_v1",
+  "offline": true,
+  "dataset": {"input": "data/scenarios/paper_v1.jsonl"},
+  "representations": ["natural_language", "key_value", "json", "semantic_json"],
+  "models": [
+    {"name": "mock_llmca", "kind": "mock"},
+    {"name": "majority_baseline", "kind": "majority"},
+    {"name": "rule_baseline", "kind": "rule"},
+    {"name": "nearest_neighbor_baseline", "kind": "supervised"}
+  ],
+  "inference": {"budget": {"max_requests": 23040, "max_tokens": 0, "max_usd": 0}},
+  "reporting": {"exclude_mock_from_publication_tables": true},
+  "study_scope": "Framework process demonstration on synthetic data; no controlled LLM inference experiment"
+}

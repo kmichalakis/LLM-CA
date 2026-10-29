@@ -1,0 +1,21 @@
+{
+  "run_id": "demo_mock",
+  "dataset": {
+    "input": "data/scenarios/base.jsonl"
+  },
+  "representations": ["natural_language", "key_value", "json", "semantic_json"],
+  "models": [
+    {"name": "mock_llmca", "kind": "mock", "temperature": 0, "max_output_tokens": 400},
+    {"name": "majority_baseline", "kind": "majority"},
+    {"name": "rule_baseline", "kind": "rule"},
+    {"name": "supervised_baseline", "kind": "supervised"}
+  ],
+  "inference": {
+    "timeout": 30,
+    "max_retries": 2,
+    "budget": {"max_requests": 100000, "max_tokens": 10000000, "max_usd": 0}
+  },
+  "reporting": {
+    "exclude_mock_from_publication_tables": true
+  }
+}

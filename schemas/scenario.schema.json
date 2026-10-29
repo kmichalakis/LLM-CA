@@ -1,0 +1,468 @@
+{
+  "$defs": {
+    "Annotation": {
+      "additionalProperties": false,
+      "properties": {
+        "adjudication_status": {
+          "enum": [
+            "synthetic_rule",
+            "pending",
+            "adjudicated"
+          ],
+          "title": "Adjudication Status",
+          "type": "string"
+        },
+        "adjudicator_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adjudicator Id"
+        },
+        "adjudicator_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "human",
+                "software_fixture",
+                "automated_model"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adjudicator Type"
+        },
+        "ambiguity_level": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Ambiguity Level",
+          "type": "string"
+        },
+        "annotation_protocol_version": {
+          "title": "Annotation Protocol Version",
+          "type": "string"
+        },
+        "annotator_type": {
+          "enum": [
+            "rule_generator",
+            "human",
+            "mixed"
+          ],
+          "title": "Annotator Type",
+          "type": "string"
+        },
+        "independent_labels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Independent Labels",
+          "type": "array"
+        },
+        "provenance": {
+          "title": "Provenance",
+          "type": "string"
+        },
+        "review_evidence": {
+          "items": {
+            "$ref": "#/$defs/AnnotationEvidence"
+          },
+          "title": "Review Evidence",
+          "type": "array"
+        },
+        "review_package_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Package Id"
+        }
+      },
+      "required": [
+        "annotator_type",
+        "annotation_protocol_version",
+        "adjudication_status",
+        "ambiguity_level",
+        "provenance"
+      ],
+      "title": "Annotation",
+      "type": "object"
+    },
+    "AnnotationEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "record_hash": {
+          "title": "Record Hash",
+          "type": "string"
+        },
+        "reviewer_id": {
+          "title": "Reviewer Id",
+          "type": "string"
+        },
+        "reviewer_type": {
+          "enum": [
+            "human",
+            "software_fixture",
+            "automated_model"
+          ],
+          "title": "Reviewer Type",
+          "type": "string"
+        },
+        "situation_label": {
+          "title": "Situation Label",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer_id",
+        "reviewer_type",
+        "task_id",
+        "record_hash",
+        "situation_label"
+      ],
+      "title": "AnnotationEvidence",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "is_missing": {
+          "title": "Is Missing",
+          "type": "boolean"
+        },
+        "key": {
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "semantic_definition": {
+          "minLength": 1,
+          "title": "Semantic Definition",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "value": {
+          "title": "Value"
+        },
+        "value_type": {
+          "$ref": "#/$defs/ValueType"
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "value_type",
+        "timestamp",
+        "source",
+        "is_missing",
+        "semantic_definition"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "OriginType": {
+      "enum": [
+        "synthetic",
+        "dataset_derived",
+        "real_observation"
+      ],
+      "title": "OriginType",
+      "type": "string"
+    },
+    "PerturbationInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "changed_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Changed Keys",
+          "type": "array"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Id"
+        },
+        "perturbation_type": {
+          "enum": [
+            "complete",
+            "missingness",
+            "irrelevance",
+            "noise",
+            "conflict",
+            "stale",
+            "counterfactual"
+          ],
+          "title": "Perturbation Type",
+          "type": "string"
+        },
+        "repeat_index": {
+          "title": "Repeat Index",
+          "type": "integer"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "severity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Severity"
+        },
+        "target_invariant": {
+          "title": "Target Invariant",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "perturbation_type",
+        "severity",
+        "changed_keys",
+        "parent_id",
+        "repeat_index",
+        "seed",
+        "target_invariant"
+      ],
+      "title": "PerturbationInfo",
+      "type": "object"
+    },
+    "Split": {
+      "enum": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_acceptable": {
+          "title": "Abstain Acceptable",
+          "type": "boolean"
+        },
+        "acceptable_situation_labels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Acceptable Situation Labels",
+          "type": "array"
+        },
+        "allowed_actions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Actions",
+          "type": "array"
+        },
+        "forbidden_actions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Forbidden Actions",
+          "type": "array"
+        },
+        "preferred_actions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preferred Actions",
+          "type": "array"
+        },
+        "rationale_reference": {
+          "title": "Rationale Reference",
+          "type": "string"
+        },
+        "relevant_observation_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Relevant Observation Keys",
+          "type": "array"
+        },
+        "situation_label": {
+          "title": "Situation Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "situation_label",
+        "acceptable_situation_labels",
+        "relevant_observation_keys",
+        "allowed_actions",
+        "preferred_actions",
+        "forbidden_actions",
+        "abstain_acceptable",
+        "rationale_reference"
+      ],
+      "title": "Target",
+      "type": "object"
+    },
+    "ValueType": {
+      "enum": [
+        "scalar",
+        "categorical",
+        "bool",
+        "list",
+        "text"
+      ],
+      "title": "ValueType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "annotation": {
+      "$ref": "#/$defs/Annotation"
+    },
+    "context": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Context",
+      "type": "array"
+    },
+    "domain": {
+      "title": "Domain",
+      "type": "string"
+    },
+    "license": {
+      "title": "License",
+      "type": "string"
+    },
+    "origin_type": {
+      "$ref": "#/$defs/OriginType"
+    },
+    "perturbation": {
+      "$ref": "#/$defs/PerturbationInfo"
+    },
+    "scenario_family_id": {
+      "title": "Scenario Family Id",
+      "type": "string"
+    },
+    "scenario_id": {
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "source_reference": {
+      "title": "Source Reference",
+      "type": "string"
+    },
+    "split": {
+      "$ref": "#/$defs/Split"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "target": {
+      "$ref": "#/$defs/Target"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "scenario_family_id",
+    "domain",
+    "origin_type",
+    "source_reference",
+    "license",
+    "split",
+    "seed",
+    "timestamp",
+    "context",
+    "target",
+    "annotation"
+  ],
+  "title": "Scenario",
+  "type": "object"
+}

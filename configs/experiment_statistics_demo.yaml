@@ -1,0 +1,12 @@
+{
+  "run_id": "statistics_demo",
+  "dataset": {"input": "data/scenarios/statistics_demo.jsonl"},
+  "representations": ["semantic_json"],
+  "models": [
+    {"name": "mock_llmca", "kind": "mock"},
+    {"name": "majority_baseline", "kind": "majority"},
+    {"name": "rule_baseline", "kind": "rule"},
+    {"name": "supervised_baseline", "kind": "supervised"}
+  ],
+  "inference": {"budget": {"max_requests": 1000, "max_tokens": 1000000, "max_usd": 0}}
+}

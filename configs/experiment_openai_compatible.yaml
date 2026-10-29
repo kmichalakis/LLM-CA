@@ -1,0 +1,25 @@
+{
+  "run_id": "real_provider_pilot",
+  "dataset": {
+    "input": "data/scenarios/base.jsonl"
+  },
+  "representations": ["semantic_json"],
+  "models": [
+    {
+      "name": "openai_compatible_llm",
+      "kind": "openai_compatible",
+      "model_id": "gpt-4.1-mini",
+      "base_url": "https://api.openai.com/v1",
+      "temperature": 0,
+      "max_output_tokens": 400
+    }
+  ],
+  "inference": {
+    "timeout": 45,
+    "max_retries": 2,
+    "budget": {"max_requests": 20, "max_tokens": 200000, "max_usd": 5}
+  },
+  "reporting": {
+    "exclude_mock_from_publication_tables": true
+  }
+}

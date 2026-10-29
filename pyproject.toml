@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llmca"
+version = "0.1.0"
+description = "Domain-agnostic LLM context reasoning simulation and benchmark platform"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "LLM-CA contributors" }]
+dependencies = [
+  "pydantic>=2.0",
+  "pandas>=2.0"
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy", "scikit-learn"]
+reports = ["matplotlib>=3.8,<4"]
+validation = ["coverage>=7,<8"]
+
+[project.scripts]
+llmca = "llmca.cli:main"
+llmca-gui = "llmca.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true

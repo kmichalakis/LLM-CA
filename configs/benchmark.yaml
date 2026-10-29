@@ -1,0 +1,21 @@
+{
+  "dataset": {
+    "base_scenarios_per_domain": 150,
+    "splits": {"train": 0.6, "validation": 0.2, "test": 0.2},
+    "origin_type": "synthetic"
+  },
+  "generation": {
+    "balanced": true,
+    "perturbations": true,
+    "perturbation_repeats": 1,
+    "missingness_severities": [0.1, 0.25],
+    "irrelevance_counts": [5],
+    "noise_severities": [0.1],
+    "include_conflict": true,
+    "include_stale": true,
+    "include_counterfactual": true
+  },
+  "reporting": {
+    "exclude_mock_from_publication_tables": true
+  }
+}
